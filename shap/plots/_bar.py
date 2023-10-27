@@ -53,7 +53,7 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
 
     """
 
-     bar_colors = {
+    bar_colors = {
         "blue_lch": colors.blue_lch,
         "red_lch": colors.red_lch,
         "blue": colors.blue_rgb,
