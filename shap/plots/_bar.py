@@ -53,7 +53,7 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
 
     """
 
-    bar_colors = {
+     bar_colors = {
         "blue_lch": colors.blue_lch,
         "red_lch": colors.red_lch,
         "blue": colors.blue_rgb,
@@ -61,6 +61,7 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
         "light_blue": colors.light_blue_rgb,
         "light_red": colors.light_red_rgb
     }
+         
             
     # assert str(type(shap_values)).endswith("Explanation'>"), "The shap_values parameter must be a shap.Explanation object!"
     # convert Explanation objects to dictionaries
