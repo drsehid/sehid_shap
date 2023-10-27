@@ -54,9 +54,12 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
     """
 
     bar_colors = {
-        "blue": colors.blue_rgb,
-        "red": colors.red_rgb,
-        "green": colors.green_rgb
+        "blue_lch": blue_lch,
+        "red_lch": red_lch,
+        "blue": blue_rgb,
+        "red": red_rgb,
+        "light_blue": light_blue_rgb,
+        "light_red": light_red_rgb
     }
             
     # assert str(type(shap_values)).endswith("Explanation'>"), "The shap_values parameter must be a shap.Explanation object!"
