@@ -233,11 +233,6 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
     patterns = (None, '\\\\', '++', 'xx', '////', '*', 'o', 'O', '.', '-')
     total_width = 0.7
     bar_width = total_width / len(values)
-    bar_colors = {
-        "blue": colors.blue_rgb,
-        "red": colors.red_rgb,
-        "green": colors.green_rgb
-    }
     for i in range(len(values)):
         ypos_offset = - ((i - len(values) / 2) * bar_width + bar_width / 2)
         pl.barh(
