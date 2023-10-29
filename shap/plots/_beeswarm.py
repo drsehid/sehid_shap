@@ -945,9 +945,10 @@ def summary_legacy(shap_values, features=None, feature_names=None, max_display=N
     pl.gca().tick_params('x', labelsize=11)
     pl.ylim(-1, len(feature_order))
     if plot_type == "bar":
-        pl.xlabel(x_label, fontsize=13)
+        pl.xlabel(x_label, fontsize=12)
     else:
         pl.xlabel(labels['VALUE'], fontsize=13)
     pl.tight_layout()
     if show:
         pl.show()
+return pl
