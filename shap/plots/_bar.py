@@ -20,7 +20,7 @@ from ._utils import (
 # TODO: improve the bar chart to look better like the waterfall plot with numbers inside the bars when they fit
 # TODO: Have the Explanation object track enough data so that we can tell (and so show) how many instances are in each cohort
 def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clustering_cutoff=0.5, xlabel="SHAP Value",
-        merge_cohorts=False, show_data="auto", show=True, bar_title="Bar", bar_color="#FFFFFF", font_size=12):
+        merge_cohorts=False, show_data="auto", show=True, bar_title="Bar", bar_color="#FFFFFF", font_size=12, title_size=13):
     """Create a bar plot of a set of SHAP values.
 
     If a single sample is passed, then we plot the SHAP values as a bar chart. If an
@@ -293,7 +293,7 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
     #     pl.xlabel(labels["GLOBAL_VALUE"], fontsize=13)
     # else:
     pl.xlabel(xlabel, fontsize=font_size)
-    pl.title(bar_title, fontsize=font_size)
+    pl.title(bar_title, fontsize=title_size)
 
     if len(values) > 1:
         pl.legend(fontsize=font_size)
