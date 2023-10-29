@@ -293,6 +293,7 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
     #     pl.xlabel(labels["GLOBAL_VALUE"], fontsize=13)
     # else:
     pl.xlabel(xlabel, fontsize=font_size)
+    pl.title(bar_title, fontize=font_size)
 
     if len(values) > 1:
         pl.legend(fontsize=font_size)
