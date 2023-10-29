@@ -122,15 +122,6 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
     if issubclass(type(feature_names), str):
         feature_names = [ordinal_str(i)+" "+feature_names for i in range(len(values[0]))]
 
-    # build our auto xlabel based on the transform history of the Explanation object
-    for op in op_history:
-        if op["name"] == "abs":
-            xlabel = "|"+xlabel+"|"
-        elif op["name"] == "__getitem__":
-            pass # no need for slicing to effect our label, it will be used later to find the sizes of cohorts
-        else:
-            xlabel = str(op["name"])+"("+xlabel+")"
-
     # find how many instances are in each cohort (if they were created from an Explanation object)
     cohort_sizes = []
     for exp in cohort_exps:
