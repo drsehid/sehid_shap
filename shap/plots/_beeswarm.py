@@ -951,4 +951,4 @@ def summary_legacy(shap_values, features=None, feature_names=None, max_display=N
     pl.tight_layout()
     if show:
         pl.show()
-return pl
+    return pl
