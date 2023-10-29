@@ -439,7 +439,7 @@ def is_color_map(color):
 def summary_legacy(shap_values, features=None, feature_names=None, max_display=None, plot_type=None,
                  color=None, axis_color="#333333", title=None, alpha=1, show=True, sort=True,
                  color_bar=True, plot_size="auto", layered_violin_max_num_bins=20, class_names=None,
-                 class_inds=None,
+                 class_inds=None, x_label="Shap Values",
                  color_bar_label=labels["FEATURE_VALUE"],
                  cmap=colors.red_blue,
                  show_values_in_legend=False,
@@ -945,7 +945,7 @@ def summary_legacy(shap_values, features=None, feature_names=None, max_display=N
     pl.gca().tick_params('x', labelsize=11)
     pl.ylim(-1, len(feature_order))
     if plot_type == "bar":
-        pl.xlabel(labels['GLOBAL_VALUE'], fontsize=13)
+        pl.xlabel(x_label, fontsize=13)
     else:
         pl.xlabel(labels['VALUE'], fontsize=13)
     pl.tight_layout()
