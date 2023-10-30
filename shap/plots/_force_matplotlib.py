@@ -284,14 +284,14 @@ def draw_output_element(out_name, out_value, ax):
 
 def draw_base_element(base_value, ax):
     x, y = np.array([[base_value, base_value], [0.13, 0.25]])
-    line = lines.Line2D(x, y, lw=2., color='#F2F2F2')
+    line = lines.Line2D(x, y, lw=0.0, color='#F2F2F2')
     line.set_clip_on(False)
-    ax.add_line(line)
+    # ax.add_line(line)
 
-    text_out_val = plt.text(base_value, 0.33, 'base value',
+    text_out_val = plt.text(base_value, 0.33, '',
                             fontsize=12, alpha=0.0,
                             horizontalalignment='center')
-    text_out_val.set_bbox(dict(facecolor='#F2F2F2', edgecolor='#F2F2F2'))
+    # text_out_val.set_bbox(dict(facecolor='#F2F2F2', edgecolor='#F2F2F2'))
 
 
 def draw_higher_lower_element(out_value, offset_text):
@@ -303,11 +303,11 @@ def draw_higher_lower_element(out_value, offset_text):
              fontsize=13, color='#1E88E5',
              horizontalalignment='left')
 
-    plt.text(out_value, 0.4, r'$\leftarrow$\n',
+    plt.text(out_value, 0.4, r'$\leftarrow$' + "\n",
              fontsize=13, color='#1E88E5',
              horizontalalignment='center')
 
-    plt.text(out_value, 0.425, r'$\rightarrow$\n',
+    plt.text(out_value, 0.425, r'$\rightarrow$' + "\n",
              fontsize=13, color='#FF0D57',
              horizontalalignment='center')
 
