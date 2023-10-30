@@ -89,7 +89,7 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
     # Draw initial line
     if feature_type == 'positive':
         x, y = np.array([[pre_val, pre_val], [0, -0.18]])
-        line = lines.Line2D(x, y, lw=1., alpha=0.5, color=colors[0])
+        line = lines.Line2D(x, y, lw=2., color=colors[0])
         line.set_clip_on(False)
         ax.add_line(line)
         start_text = pre_val
@@ -121,7 +121,7 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
 
         text_out_val = plt.text(start_text - sign * offset_text,
                                 -0.15, text, fontproperties=font,
-                                fontsize=16, color=colors[0],
+                                fontsize=18, color=colors[0],
                                 horizontalalignment=alignment,
                                 va=va_alignment,
                                 rotation=text_rotation)
@@ -277,12 +277,12 @@ def draw_output_element(out_name, out_value, ax):
     model_proba = expit(out_value)
     text_out_val = plt.text(out_value, 0.25, f'Shap Value: {out_value:.2f} | Probability: {model_proba:0.2f}',
                             fontproperties=font,
-                            fontsize=16,
+                            fontsize=17,
                             horizontalalignment='center')
     text_out_val.set_bbox(dict(facecolor='white', edgecolor='white'))
 
     text_out_val = plt.text(out_value, 0.33, out_name,
-                            fontsize=16, alpha=1, 
+                            fontsize=17, alpha=1, 
                             fontproperties=font,
                             horizontalalignment='center')
     text_out_val.set_bbox(dict(facecolor='white', edgecolor='white'))
@@ -306,21 +306,21 @@ def draw_higher_lower_element(out_value, offset_text):
     font.set_family("Arial")
 
     plt.text(out_value - offset_text, 0.405, 'higher\n',
-             fontsize=15, color='#FF0D57',
+             fontsize=16, color='#FF0D57',
              fontproperties=font,
              horizontalalignment='right')
 
     plt.text(out_value + offset_text, 0.405, 'lower\n',
-             fontsize=15, color='#1E88E5',
+             fontsize=16, color='#1E88E5',
              fontproperties=font,
              horizontalalignment='left')
 
     plt.text(out_value, 0.4, r'$\leftarrow$' + "\n",
-             fontsize=15, color='#1E88E5',
+             fontsize=16, color='#1E88E5',
              horizontalalignment='center')
 
     plt.text(out_value, 0.425, r'$\rightarrow$' + "\n",
-             fontsize=15, color='#FF0D57',
+             fontsize=16, color='#FF0D57',
              horizontalalignment='center')
 
 
@@ -339,6 +339,7 @@ def update_axis_limits(ax, total_pos, pos_features, total_neg,
     else:
         max_x = out_value + padding
     ax.set_xlim(min_x, max_x)
+    ax.tick_params(axis='x', labelsize=13) 
 
     plt.tick_params(top=True, bottom=False, left=False, right=False, labelleft=False,
                     labeltop=True, labelbottom=False)
