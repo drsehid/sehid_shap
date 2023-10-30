@@ -118,7 +118,7 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
 
         text_out_val = plt.text(start_text - sign * offset_text,
                                 -0.15, text,
-                                fontsize=12, color=colors[0],
+                                fontsize=13, color="#000000",
                                 horizontalalignment=alignment,
                                 va=va_alignment,
                                 rotation=text_rotation)
