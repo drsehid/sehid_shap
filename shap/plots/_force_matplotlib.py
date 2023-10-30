@@ -96,6 +96,9 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
 
     box_end = out_value
     val = out_value
+    font0 = FontProperties()
+    font = font0.copy()
+    font.set_family("Arial")
     for feature in features:
         # Exclude all labels that do not contribute at least 10% to the total
         feature_contribution = np.abs(float(feature[0]) - pre_val) / np.abs(total_effect)
@@ -117,7 +120,7 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
             va_alignment = 'baseline'
 
         text_out_val = plt.text(start_text - sign * offset_text,
-                                -0.15, text,
+                                -0.15, text, fontproperties=font,
                                 fontsize=12, color=colors[0],
                                 horizontalalignment=alignment,
                                 va=va_alignment,
@@ -298,12 +301,18 @@ def draw_base_element(base_value, ax):
 
 
 def draw_higher_lower_element(out_value, offset_text):
+    font0 = FontProperties()
+    font = font0.copy()
+    font.set_family("Arial")
+
     plt.text(out_value - offset_text, 0.405, 'higher\n',
              fontsize=13, color='#FF0D57',
+             fontproperties=font,
              horizontalalignment='right')
 
     plt.text(out_value + offset_text, 0.405, 'lower\n',
              fontsize=13, color='#1E88E5',
+             fontproperties=font,
              horizontalalignment='left')
 
     plt.text(out_value, 0.4, r'$\leftarrow$' + "\n",
