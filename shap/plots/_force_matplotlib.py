@@ -118,7 +118,7 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
 
         text_out_val = plt.text(start_text - sign * offset_text,
                                 -0.15, text,
-                                fontsize=13, color="#000000",
+                                fontsize=12, color=colors[0],
                                 horizontalalignment=alignment,
                                 va=va_alignment,
                                 rotation=text_rotation)
@@ -275,7 +275,7 @@ def draw_output_element(out_name, out_value, ax):
     text_out_val.set_bbox(dict(facecolor='white', edgecolor='white'))
 
     text_out_val = plt.text(out_value, 0.33, out_name,
-                            fontsize=12, alpha=0.5,
+                            fontsize=12, alpha=0.75,
                             horizontalalignment='center')
     text_out_val.set_bbox(dict(facecolor='white', edgecolor='white'))
 
