@@ -272,12 +272,12 @@ def draw_output_element(out_name, out_value, ax):
     model_proba = expit(out_value)
     text_out_val = plt.text(out_value, 0.25, f'Shap Value: {out_value:.2f} | Probability: {model_proba:0.2f}',
                             fontproperties=font,
-                            fontsize=14,
+                            fontsize=13,
                             horizontalalignment='center')
     text_out_val.set_bbox(dict(facecolor='white', edgecolor='white'))
 
     text_out_val = plt.text(out_value, 0.33, out_name,
-                            fontsize=12, alpha=0.75,
+                            fontsize=13, alpha=1,
                             horizontalalignment='center')
     text_out_val.set_bbox(dict(facecolor='white', edgecolor='white'))
 
