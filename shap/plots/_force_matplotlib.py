@@ -121,7 +121,7 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
 
         text_out_val = plt.text(start_text - sign * offset_text,
                                 -0.15, text, fontproperties=font,
-                                fontsize=14, color=colors[0],
+                                fontsize=16, color=colors[0],
                                 horizontalalignment=alignment,
                                 va=va_alignment,
                                 rotation=text_rotation)
@@ -277,12 +277,12 @@ def draw_output_element(out_name, out_value, ax):
     model_proba = expit(out_value)
     text_out_val = plt.text(out_value, 0.25, f'Shap Value: {out_value:.2f} | Probability: {model_proba:0.2f}',
                             fontproperties=font,
-                            fontsize=15,
+                            fontsize=16,
                             horizontalalignment='center')
     text_out_val.set_bbox(dict(facecolor='white', edgecolor='white'))
 
     text_out_val = plt.text(out_value, 0.33, out_name,
-                            fontsize=15, alpha=1, 
+                            fontsize=16, alpha=1, 
                             fontproperties=font,
                             horizontalalignment='center')
     text_out_val.set_bbox(dict(facecolor='white', edgecolor='white'))
@@ -306,21 +306,21 @@ def draw_higher_lower_element(out_value, offset_text):
     font.set_family("Arial")
 
     plt.text(out_value - offset_text, 0.405, 'higher\n',
-             fontsize=14, color='#FF0D57',
+             fontsize=15, color='#FF0D57',
              fontproperties=font,
              horizontalalignment='right')
 
     plt.text(out_value + offset_text, 0.405, 'lower\n',
-             fontsize=14, color='#1E88E5',
+             fontsize=15, color='#1E88E5',
              fontproperties=font,
              horizontalalignment='left')
 
     plt.text(out_value, 0.4, r'$\leftarrow$' + "\n",
-             fontsize=14, color='#1E88E5',
+             fontsize=15, color='#1E88E5',
              horizontalalignment='center')
 
     plt.text(out_value, 0.425, r'$\rightarrow$' + "\n",
-             fontsize=14, color='#FF0D57',
+             fontsize=15, color='#FF0D57',
              horizontalalignment='center')
 
 
