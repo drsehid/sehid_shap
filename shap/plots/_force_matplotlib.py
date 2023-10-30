@@ -257,6 +257,7 @@ def format_data(data):
 
     return neg_features, total_neg, pos_features, total_pos
 
+from scipy.special import expit
 
 def draw_output_element(out_name, out_value, ax):
     # Add output value
@@ -268,7 +269,8 @@ def draw_output_element(out_name, out_value, ax):
     font0 = FontProperties()
     font = font0.copy()
     font.set_weight('bold')
-    text_out_val = plt.text(out_value, 0.25, f'{out_value:.2f}',
+    model_proba = expit(out_value)
+    text_out_val = plt.text(out_value, 0.25, f'Shap Value: {out_value:.2f} | Probability: {model_proba:0.2f}',
                             fontproperties=font,
                             fontsize=14,
                             horizontalalignment='center')
@@ -287,25 +289,25 @@ def draw_base_element(base_value, ax):
     ax.add_line(line)
 
     text_out_val = plt.text(base_value, 0.33, 'base value',
-                            fontsize=12, alpha=0.5,
+                            fontsize=12, alpha=0.0,
                             horizontalalignment='center')
-    text_out_val.set_bbox(dict(facecolor='white', edgecolor='white'))
+    text_out_val.set_bbox(dict(facecolor='#F2F2F2', edgecolor='#F2F2F2'))
 
 
 def draw_higher_lower_element(out_value, offset_text):
-    plt.text(out_value - offset_text, 0.405, 'higher',
+    plt.text(out_value - offset_text, 0.405, 'higher\n',
              fontsize=13, color='#FF0D57',
              horizontalalignment='right')
 
-    plt.text(out_value + offset_text, 0.405, 'lower',
+    plt.text(out_value + offset_text, 0.405, 'lower\n',
              fontsize=13, color='#1E88E5',
              horizontalalignment='left')
 
-    plt.text(out_value, 0.4, r'$\leftarrow$',
+    plt.text(out_value, 0.4, r'$\leftarrow$\n',
              fontsize=13, color='#1E88E5',
              horizontalalignment='center')
 
-    plt.text(out_value, 0.425, r'$\rightarrow$',
+    plt.text(out_value, 0.425, r'$\rightarrow$\n',
              fontsize=13, color='#FF0D57',
              horizontalalignment='center')
 
