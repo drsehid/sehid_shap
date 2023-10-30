@@ -268,7 +268,9 @@ def draw_output_element(out_name, out_value, ax):
 
     font0 = FontProperties()
     font = font0.copy()
-    font.set_weight('bold')
+    font.set_family("Arial")
+    # font.set_weight('bold')
+    
     model_proba = expit(out_value)
     text_out_val = plt.text(out_value, 0.25, f'Shap Value: {out_value:.2f} | Probability: {model_proba:0.2f}',
                             fontproperties=font,
@@ -277,7 +279,8 @@ def draw_output_element(out_name, out_value, ax):
     text_out_val.set_bbox(dict(facecolor='white', edgecolor='white'))
 
     text_out_val = plt.text(out_value, 0.33, out_name,
-                            fontsize=13, alpha=1,
+                            fontsize=13, alpha=1, 
+                            fontproperties=font,
                             horizontalalignment='center')
     text_out_val.set_bbox(dict(facecolor='white', edgecolor='white'))
 
