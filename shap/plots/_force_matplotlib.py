@@ -110,15 +110,22 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
 
         values_dict = {
             "Age Group": ["< 30", "≥ 30"],
-            "Schooling": ["0-9", "10-14", "15-20", "≥ 20"]
+            "Schooling": ["0-14", "≥ 15"],
+            "Periventricular MRI": ["Negative", "Positive"],
+            "Oligoclonal Bands": ["Negative", "Positive", "Unknown"],
+            "Breasfeeding": ["Negative", "Positive", "Unknown"],
+            "Mono or Polysymptomatic": ["Negative", "Positive", "Unknown"],
+            "Infratentorial MRI": ["Negative", "Positive"],
+            "Gender": ["Female", "Male"],
+            "Symptom Types": ["0", "1", "2", "3"],
+            "MRI Lesion Types": ["0", "1", "2", "3", "4"],
         }
 
         # Draw labels.
         if feature[1] == "":
             text = feature[2]
         else:
-            text = feature[2] + ' = M' + feature[1]
-
+            text = feature[2] + ' = ' + values_dict[feature[2]][feature[1]]
         if text_rotation != 0:
             va_alignment = 'top'
         else:
