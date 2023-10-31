@@ -108,11 +108,16 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
         # Compute value for current feature
         val = float(feature[0])
 
+        values_dict = {
+            "Age Group": ["< 30", "≥ 30"],
+            "Schooling": ["0-9", "10-14", "15-20", "≥ 20"]
+        }
+
         # Draw labels.
         if feature[1] == "":
             text = feature[2]
         else:
-            text = feature[2] + ' = ' + feature[1]
+            text = feature[2] + ' = X' + feature[1]
 
         if text_rotation != 0:
             va_alignment = 'top'
