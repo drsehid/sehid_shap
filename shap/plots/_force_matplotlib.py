@@ -113,7 +113,7 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
             "Schooling": ["0-14", "≥ 15"],
             "Periventricular MRI": ["Negative", "Positive"],
             "Oligoclonal Bands": ["Negative", "Positive", "Unknown"],
-            "Breasfeeding": ["Negative", "Positive", "Unknown"],
+            "Breastfeeding": ["Negative", "Positive", "Unknown"],
             "Mono or Polysymptomatic": ["Negative", "Positive", "Unknown"],
             "Infratentorial MRI": ["Negative", "Positive"],
             "Gender": ["Female", "Male"],
