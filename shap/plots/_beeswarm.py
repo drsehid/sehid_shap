@@ -14,6 +14,7 @@ from scipy.stats import gaussian_kde
 from .. import Explanation
 from ..utils import safe_isinstance
 from ..utils._exceptions import DimensionError
+from matplotlib.font_manager import FontProperties
 from . import colors
 from ._labels import labels
 from ._utils import (
@@ -23,6 +24,10 @@ from ._utils import (
     merge_nodes,
     sort_inds,
 )
+
+font0 = FontProperties()
+font = font0.copy()
+font.set_family("Arial")
 
 
 # TODO: Add support for hclustering based explanations where we sort the leaf order by magnitude and then show the dendrogram to the left
@@ -414,11 +419,11 @@ def beeswarm(shap_values, max_display=10, order=Explanation.abs.mean(0),
     pl.gca().spines['top'].set_visible(False)
     pl.gca().spines['left'].set_visible(False)
     pl.gca().tick_params(color=axis_color, labelcolor=axis_color)
-    pl.yticks(range(len(feature_inds)), reversed(yticklabels), fontsize=13)
+    pl.yticks(range(len(feature_inds)), reversed(yticklabels), fontsize=13, fontproperties=font)
     pl.gca().tick_params('y', length=20, width=0.5, which='major')
-    pl.gca().tick_params('x', labelsize=11)
+    pl.gca().tick_params('x', labelsize=11, fontproperties=font)
     pl.ylim(-1, len(feature_inds))
-    pl.xlabel(labels['VALUE'], fontsize=13)
+    pl.xlabel(labels['VALUE'], fontsize=13, fontproperties=font)
     if show:
         pl.show()
 
@@ -439,7 +444,7 @@ def is_color_map(color):
 def summary_legacy(shap_values, features=None, feature_names=None, max_display=None, plot_type=None,
                  color=None, axis_color="#333333", title=None, alpha=1, show=True, sort=True,
                  color_bar=True, plot_size="auto", layered_violin_max_num_bins=20, class_names=None,
-                 class_inds=None, x_label="Shap Values",
+                 class_inds=None,
                  color_bar_label=labels["FEATURE_VALUE"],
                  cmap=colors.red_blue,
                  show_values_in_legend=False,
@@ -872,7 +877,7 @@ def summary_legacy(shap_values, features=None, feature_names=None, max_display=N
         y_pos = np.arange(len(feature_inds))
         global_shap_values = np.abs(shap_values).mean(0)
         pl.barh(y_pos, global_shap_values[feature_inds], 0.7, align='center', color=color)
-        pl.yticks(y_pos, fontsize=13)
+        pl.yticks(y_pos, fontsize=13, fontproperties=font)
         pl.gca().set_yticklabels([feature_names[i] for i in feature_inds])
 
     elif multi_class and plot_type == "bar":
@@ -915,7 +920,7 @@ def summary_legacy(shap_values, features=None, feature_names=None, max_display=N
             left_pos += global_shap_values[feature_inds]
         pl.yticks(y_pos, fontsize=13)
         pl.gca().set_yticklabels([feature_names[i] for i in feature_inds])
-        pl.legend(frameon=False, fontsize=12)
+        pl.legend(frameon=False, fontsize=12, fontproperties=font)
 
     # draw the color bar
     if color_bar and features is not None and plot_type != "bar" and \
@@ -939,16 +944,15 @@ def summary_legacy(shap_values, features=None, feature_names=None, max_display=N
     pl.gca().spines['top'].set_visible(False)
     pl.gca().spines['left'].set_visible(False)
     pl.gca().tick_params(color=axis_color, labelcolor=axis_color)
-    pl.yticks(range(len(feature_order)), [feature_names[i] for i in feature_order], fontsize=13)
+    pl.yticks(range(len(feature_order)), [feature_names[i] for i in feature_order], fontsize=13, fontproperties=font)
     if plot_type != "bar":
         pl.gca().tick_params('y', length=20, width=0.5, which='major')
     pl.gca().tick_params('x', labelsize=11)
     pl.ylim(-1, len(feature_order))
     if plot_type == "bar":
-        pl.xlabel(x_label, fontsize=12)
+        pl.xlabel(labels['GLOBAL_VALUE'], fontsize=13, fontproperties=font)
     else:
-        pl.xlabel(labels['VALUE'], fontsize=13)
+        pl.xlabel(labels['VALUE'], fontsize=13, fontproperties=font)
     pl.tight_layout()
     if show:
         pl.show()
-    return pl
