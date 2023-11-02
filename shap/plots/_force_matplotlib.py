@@ -113,14 +113,14 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
             "Age Group": ["< 30 (y)", "≥ 30 (y)"],
             "Schooling": ["< 15 (y)", "≥ 15 (y)"],
             "Periventricular MRI": ["Negative", "Positive"],
-            "Oligoclonal Bands": ["Negative", "Positive", "Unknown"],
-            "Breastfeeding": ["Negative", "Positive", "Unknown"],
-            "Mono or Polysymptomatic": ["Negative", "Positive", "Unknown"],
+            "Oligoclonal Bands": ["Negative", "Positive"],
+            "Breastfeeding": ["Negative", "Positive"],
+            "Mono or Polysymptomatic": ["Mono", "Poly"],
             "Infratentorial MRI": ["Negative", "Positive"],
             "Motor": ["Negative", "Positive"],
             "Other": ["Negative", "Positive"],
             "Gender": ["Female", "Male"],
-            "Symptom Types": ["0", "1", "2", "3"],
+            "Symptom Types": ["1", "2", "3", "4"],
             "MRI Lesion Types": ["0", "1", "2", "3", "4"],
         }
 
