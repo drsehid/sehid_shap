@@ -6,6 +6,9 @@ from matplotlib.font_manager import FontProperties
 from matplotlib.patches import PathPatch
 from matplotlib.path import Path
 
+font0 = FontProperties()
+font = font0.copy()
+font.set_family("Arial")
 
 def draw_bars(out_value, features, feature_type, width_separators, width_bar):
     """Draw the bars and separators."""
@@ -324,7 +327,7 @@ def draw_higher_lower_element(out_value, offset_text):
 
     plt.text(out_value + offset_text, 0.405, 'lower\n',
              fontsize=17, color='#1E88E5',
-             fontproperties=font,
+             fontproperties=font, 
              horizontalalignment='left')
 
     plt.text(out_value, 0.4, r'$\leftarrow$' + "\n",
