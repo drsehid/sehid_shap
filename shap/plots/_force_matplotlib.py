@@ -116,6 +116,8 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
             "Breastfeeding": ["Negative", "Positive", "Unknown"],
             "Mono or Polysymptomatic": ["Negative", "Positive", "Unknown"],
             "Infratentorial MRI": ["Negative", "Positive"],
+            "Motor": ["Negative", "Positive"],
+            "Other": ["Negative", "Positive"],
             "Gender": ["Female", "Male"],
             "Symptom Types": ["0", "1", "2", "3"],
             "MRI Lesion Types": ["0", "1", "2", "3", "4"],
@@ -125,7 +127,7 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
         if feature[1] == "":
             text = feature[2]
         else:
-            text = feature[2] + ' = ' + values_dict[feature[2]][int(float(feature[1]))]
+            text = feature[2] + ' : ' + values_dict[feature[2]][int(float(feature[1]))]
         if text_rotation != 0:
             va_alignment = 'top'
         else:
