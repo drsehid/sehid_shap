@@ -6,9 +6,7 @@ from matplotlib.font_manager import FontProperties
 from matplotlib.patches import PathPatch
 from matplotlib.path import Path
 
-font0 = FontProperties()
-font = font0.copy()
-font.set_family("Arial")
+font = FontProperties(family='times new roman', style='normal')
 
 def draw_bars(out_value, features, feature_type, width_separators, width_bar):
     """Draw the bars and separators."""
@@ -99,9 +97,8 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
 
     box_end = out_value
     val = out_value
-    font0 = FontProperties()
-    font = font0.copy()
-    font.set_family("Arial")
+    font = FontProperties(family='times new roman', style='normal')
+
     for feature in features:
         # Exclude all labels that do not contribute at least 10% to the total
         feature_contribution = np.abs(float(feature[0]) - pre_val) / np.abs(total_effect)
@@ -284,9 +281,7 @@ def draw_output_element(out_name, out_value, ax):
     line.set_clip_on(False)
     ax.add_line(line)
 
-    font0 = FontProperties()
-    font = font0.copy()
-    font.set_family("Arial")
+    font = FontProperties(family='times new roman', style='normal')
     # font.set_weight('bold')
     
     model_proba = expit(out_value)
