@@ -417,11 +417,11 @@ def beeswarm(shap_values, max_display=10, order=Explanation.abs.mean(0),
     pl.gca().spines['top'].set_visible(False)
     pl.gca().spines['left'].set_visible(False)
     pl.gca().tick_params(color=axis_color, labelcolor=axis_color)
-    pl.yticks(range(len(feature_inds)), reversed(yticklabels), fontsize=13, fontproperties=font)
-    pl.gca().tick_params('y', length=20, width=0.5, which='major')
-    pl.gca().tick_params('x', labelsize=11, fontproperties=font)
+    pl.yticks(range(len(feature_inds)), reversed(yticklabels), fontsize=13, fontproperties=font, color='#000000')
+    pl.gca().tick_params('y', length=20, width=0.5, which='major', color='#000000')
+    pl.gca().tick_params('x', labelsize=11, fontproperties=font, color='#000000')
     pl.ylim(-1, len(feature_inds))
-    pl.xlabel(labels['VALUE'], fontsize=13, fontproperties=font)
+    pl.xlabel(labels['VALUE'], fontsize=13, fontproperties=font, color='#000000')
     if show:
         pl.show()
 
@@ -875,7 +875,7 @@ def summary_legacy(shap_values, features=None, feature_names=None, max_display=N
         y_pos = np.arange(len(feature_inds))
         global_shap_values = np.abs(shap_values).mean(0)
         pl.barh(y_pos, global_shap_values[feature_inds], 0.7, align='center', color=color)
-        pl.yticks(y_pos, fontsize=13, fontproperties=font)
+        pl.yticks(y_pos, fontsize=13, fontproperties=font, color='#000000')
         pl.gca().set_yticklabels([feature_names[i] for i in feature_inds])
 
     elif multi_class and plot_type == "bar":
@@ -916,7 +916,7 @@ def summary_legacy(shap_values, features=None, feature_names=None, max_display=N
                 color=color(i), label=label
             )
             left_pos += global_shap_values[feature_inds]
-        pl.yticks(y_pos, fontsize=13)
+        pl.yticks(y_pos, fontsize=13, color='#000000')
         pl.gca().set_yticklabels([feature_names[i] for i in feature_inds])
         pl.legend(frameon=False, fontsize=12, fontproperties=font)
 
@@ -942,7 +942,7 @@ def summary_legacy(shap_values, features=None, feature_names=None, max_display=N
     pl.gca().spines['top'].set_visible(False)
     pl.gca().spines['left'].set_visible(False)
     pl.gca().tick_params(color=axis_color, labelcolor=axis_color)
-    pl.yticks(range(len(feature_order)), [feature_names[i] for i in feature_order], fontsize=13, fontproperties=font)
+    pl.yticks(range(len(feature_order)), [feature_names[i] for i in feature_order], fontsize=13, fontproperties=font, color='#000000')
     if plot_type != "bar":
         pl.gca().tick_params('y', length=20, width=0.5, which='major')
     pl.gca().tick_params('x', labelsize=11)
@@ -950,7 +950,7 @@ def summary_legacy(shap_values, features=None, feature_names=None, max_display=N
     if plot_type == "bar":
         pl.xlabel(labels['GLOBAL_VALUE'], fontsize=13, fontproperties=font)
     else:
-        pl.xlabel(labels['VALUE'], fontsize=13, fontproperties=font)
+        pl.xlabel(labels['VALUE'], fontsize=13, fontproperties=font, color='#000000')
     pl.tight_layout()
     if show:
         pl.show()
