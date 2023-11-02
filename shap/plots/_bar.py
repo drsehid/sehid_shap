@@ -17,9 +17,7 @@ from ._utils import (
     sort_inds,
 )
 
-font0 = FontProperties()
-font = font0.copy()
-font.set_family("Arial")
+font = FontProperties(family='times new roman', style='normal', size=12)
 
 
 
@@ -237,7 +235,7 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
         )
 
     # draw the yticks (the 1e-8 is so matplotlib 3.3 doesn't try and collapse the ticks)
-    pl.yticks(list(y_pos) + list(y_pos + 1e-8), yticklabels + [l.split('=')[-1] for l in yticklabels], fontsize=13)
+    pl.yticks(list(y_pos) + list(y_pos + 1e-8), yticklabels + [l.split('=')[-1] for l in yticklabels], fontproperties=font)
 
     xlen = pl.xlim()[1] - pl.xlim()[0]
     fig = pl.gcf()
@@ -255,13 +253,13 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
                 pl.text(
                     values[i,ind] - (5/72)*bbox_to_xscale, y_pos[j] + ypos_offset, format_value(values[i,ind], '%+0.02f'),
                     horizontalalignment='right', verticalalignment='center', color=bar_colors[bar_color],
-                    fontsize=font_size, fontproperties=font
+                    fontproperties=font
                 )
             else:
                 pl.text(
                     values[i,ind] + (5/72)*bbox_to_xscale, y_pos[j] + ypos_offset, format_value(values[i,ind], '%+0.02f'),
                     horizontalalignment='left', verticalalignment='center', color=bar_colors[bar_color],
-                    fontsize=font_size, fontproperties=font
+                     fontproperties=font
                 )
 
     # put horizontal lines for each feature row
@@ -298,11 +296,11 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
     # if features is None:
     #     pl.xlabel(labels["GLOBAL_VALUE"], fontsize=13)
     # else:
-    pl.xlabel(xlabel, fontsize=font_size, fontproperties=font)
-    pl.title(bar_title, fontsize=title_size, fontproperties=font)
+    pl.xlabel(xlabel, fontproperties=font)
+    pl.title(bar_title, fontproperties=font)
 
     if len(values) > 1:
-        pl.legend(fontsize=font_size, fontproperties=font)
+        pl.legend(fontproperties=font)
 
     # color the y tick labels that have the feature values as gray
     # (these fall behind the black ones with just the feature name)
@@ -324,7 +322,7 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
         pl.text(
             ct_line_pos + 0.005 * (xmax - xmin), (ymax - ymin)/2, "Clustering cutoff = " + format_value(clustering_cutoff, '%0.02f'),
             horizontalalignment='left', verticalalignment='center', color="#999999",
-            fontsize=12, rotation=-90, fontproperties=font
+            rotation=-90, fontproperties=font
         )
         l = pl.axvline(ct_line_pos, color="#dddddd", dashes=(1, 1))
         l.set_clip_on(False)
@@ -412,7 +410,7 @@ def bar_legacy(shap_values, features=None, feature_names=None, max_display=None,
         0.7, align='center',
         color=[bar_colors["blue"] for i in range(len(y_pos))]
     )
-    pl.yticks(y_pos, fontsize=13, fontproperties=font)
+    pl.yticks(y_pos, fontproperties=font)
     if features is not None:
         features = list(features)
 
