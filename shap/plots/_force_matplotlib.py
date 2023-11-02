@@ -109,8 +109,8 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
         val = float(feature[0])
 
         values_dict = {
-            "Age Group": ["< 30", "≥ 30"],
-            "Schooling": ["0-14", "≥ 15"],
+            "Age Group": ["< 30 (y)", "≥ 30 (y)"],
+            "Schooling": ["< 15 (y)", "≥ 15 (y)"],
             "Periventricular MRI": ["Negative", "Positive"],
             "Oligoclonal Bands": ["Negative", "Positive", "Unknown"],
             "Breastfeeding": ["Negative", "Positive", "Unknown"],
