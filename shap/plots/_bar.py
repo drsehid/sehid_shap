@@ -3,10 +3,10 @@ import numpy as np
 import pandas as pd
 import scipy
 
-from .._explanation import Explanation, Cohorts
+from .. import Cohorts, Explanation
 from ..utils import format_value, ordinal_str
-from matplotlib.font_manager import FontProperties
 from ..utils._exceptions import DimensionError
+from matplotlib.font_manager import FontProperties
 from . import colors
 from ._labels import labels
 from ._utils import (
@@ -22,10 +22,11 @@ font = font0.copy()
 font.set_family("Arial")
 
 
+
 # TODO: improve the bar chart to look better like the waterfall plot with numbers inside the bars when they fit
 # TODO: Have the Explanation object track enough data so that we can tell (and so show) how many instances are in each cohort
-def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clustering_cutoff=0.5,
-        merge_cohorts=False, show_data="auto", show=True, xlabel="Shap Value"):
+def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clustering_cutoff=0.5, xlabel="SHAP Value",
+        merge_cohorts=False, show_data="auto", show=True, bar_title="Bar", bar_color="#FFFFFF", font_size=12, title_size=13):
     """Create a bar plot of a set of SHAP values.
 
     If a single sample is passed, then we plot the SHAP values as a bar chart. If an
@@ -46,6 +47,10 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
         Whether ``matplotlib.pyplot.show()`` is called before returning.
         Setting this to ``False`` allows the plot
         to be customized further after it has been created.
+    bar_color: str
+        "blue", "red", "green"
+    xlabel: str
+        The label for x
 
     Examples
     --------
@@ -54,8 +59,13 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
 
     """
 
+    bar_colors = {
+        "blue": colors.blue_rgb,
+        "red": colors.red_rgb
+    }
+         
+            
     # assert str(type(shap_values)).endswith("Explanation'>"), "The shap_values parameter must be a shap.Explanation object!"
-
     # convert Explanation objects to dictionaries
     if isinstance(shap_values, Explanation):
         cohorts = {"": shap_values}
@@ -64,6 +74,7 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
     elif isinstance(shap_values, dict):
         cohorts = shap_values
     else:
+        print(type(shap_values))
         emsg = (
             "The shap_values argument must be an Explanation object, Cohorts "
             "object, or dictionary of Explanation objects!"
@@ -116,15 +127,6 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
     # TODO: Rather than just show the "1st token", "2nd token", etc. it would be better to show the "Instance 0's 1st but", etc
     if issubclass(type(feature_names), str):
         feature_names = [ordinal_str(i)+" "+feature_names for i in range(len(values[0]))]
-
-    # build our auto xlabel based on the transform history of the Explanation object
-    for op in op_history:
-        if op["name"] == "abs":
-            xlabel = "|"+xlabel+"|"
-        elif op["name"] == "__getitem__":
-            pass # no need for slicing to effect our label, it will be used later to find the sizes of cohorts
-        else:
-            xlabel = str(op["name"])+"("+xlabel+")"
 
     # find how many instances are in each cohort (if they were created from an Explanation object)
     cohort_sizes = []
@@ -230,7 +232,7 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
         pl.barh(
             y_pos + ypos_offset, values[i,feature_inds],
             bar_width, align='center',
-            color=[colors.blue_rgb if values[i, feature_inds[j]] <= 0 else colors.red_rgb for j in range(len(y_pos))],
+            color=[bar_colors[bar_color] for j in range(len(y_pos))],
             hatch=patterns[i], edgecolor=(1,1,1,0.8), label=f"{cohort_labels[i]} [{cohort_sizes[i] if i < len(cohort_sizes) else None}]"
         )
 
@@ -245,8 +247,6 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
     width = bbox.width
     bbox_to_xscale = xlen/width
 
-   
-
     for i in range(len(values)):
         ypos_offset = - ((i - len(values) / 2) * bar_width + bar_width / 2)
         for j in range(len(y_pos)):
@@ -254,14 +254,14 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
             if values[i,ind] < 0:
                 pl.text(
                     values[i,ind] - (5/72)*bbox_to_xscale, y_pos[j] + ypos_offset, format_value(values[i,ind], '%+0.02f'),
-                    horizontalalignment='right', verticalalignment='center', color=colors.blue_rgb,
-                    fontsize=12, fontproperties=font
+                    horizontalalignment='right', verticalalignment='center', color=bar_colors[bar_color],
+                    fontsize=font_size, fontproperties=font
                 )
             else:
                 pl.text(
                     values[i,ind] + (5/72)*bbox_to_xscale, y_pos[j] + ypos_offset, format_value(values[i,ind], '%+0.02f'),
-                    horizontalalignment='left', verticalalignment='center', color=colors.red_rgb,
-                    fontsize=12, fontproperties=font
+                    horizontalalignment='left', verticalalignment='center', color=bar_colors[bar_color],
+                    fontsize=font_size, fontproperties=font
                 )
 
     # put horizontal lines for each feature row
@@ -298,10 +298,11 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
     # if features is None:
     #     pl.xlabel(labels["GLOBAL_VALUE"], fontsize=13)
     # else:
-    pl.xlabel(xlabel, fontsize=13, fontproperties=font)
+    pl.xlabel(xlabel, fontsize=font_size, fontproperties=font)
+    pl.title(bar_title, fontsize=title_size, fontproperties=font)
 
     if len(values) > 1:
-        pl.legend(fontsize=12, fontproperties=font)
+        pl.legend(fontsize=font_size, fontproperties=font)
 
     # color the y tick labels that have the feature values as gray
     # (these fall behind the black ones with just the feature name)
@@ -380,6 +381,10 @@ def bar(shap_values, max_display=10, order=Explanation.abs, clustering=None, clu
 #     return max(left_val, right_val) + 1, max(left_sum, right_sum)
 
 def bar_legacy(shap_values, features=None, feature_names=None, max_display=None, show=True):
+    bar_colors = {
+        "blue": colors.blue_rgb,
+        "red": colors.red_rgb
+    }
 
     # unwrap pandas series
     if isinstance(features, pd.Series):
@@ -401,10 +406,11 @@ def bar_legacy(shap_values, features=None, feature_names=None, max_display=None,
     #
     feature_inds = feature_order[:max_display]
     y_pos = np.arange(len(feature_inds), 0, -1)
+    
     pl.barh(
         y_pos, shap_values[feature_inds],
         0.7, align='center',
-        color=[colors.red_rgb if shap_values[feature_inds[i]] > 0 else colors.blue_rgb for i in range(len(y_pos))]
+        color=[bar_colors["blue"] for i in range(len(y_pos))]
     )
     pl.yticks(y_pos, fontsize=13, fontproperties=font)
     if features is not None:
