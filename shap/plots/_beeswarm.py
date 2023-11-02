@@ -25,9 +25,7 @@ from ._utils import (
     sort_inds,
 )
 
-font0 = FontProperties()
-font = font0.copy()
-font.set_family("Arial")
+font = FontProperties(family='times new roman', style='normal')
 
 
 # TODO: Add support for hclustering based explanations where we sort the leaf order by magnitude and then show the dendrogram to the left
