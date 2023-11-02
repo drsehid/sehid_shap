@@ -5,6 +5,7 @@ from matplotlib import lines
 from matplotlib.font_manager import FontProperties
 from matplotlib.patches import PathPatch
 from matplotlib.path import Path
+import math
 
 font = FontProperties(family='times new roman', style='normal')
 
@@ -127,7 +128,7 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
         if feature[1] == "":
             text = feature[2]
         else:
-            if feature[1]:
+            if not math.isnan(float(feature[1])):
                 text = feature[2] + ': ' + values_dict[feature[2]][int(float(feature[1]))]
             else:
                 text = feature[2] + ': ' + "Unknown"
